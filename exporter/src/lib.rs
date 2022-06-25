@@ -4,20 +4,6 @@ use color_eyre::eyre::{eyre, Result};
 use id3::{Tag, TagLike};
 use serde::Serialize;
 
-#[test]
-fn parse_single_file() {
-    let (track, _) = parse_file("../TestData/sherlock_holmes.mp3").unwrap();
-
-    let reference_track = Track {
-        title: "02 - The Red-Headed League".to_string(),
-        reader: vec!["Sir Arthur Conan Doyle".to_string()],
-        track: 2,
-        disc: None,
-    };
-
-    assert_eq!(reference_track, track);
-}
-
 pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<(Track, Tag)> {
     let tag = Tag::read_from_path(&path)?;
     tracing::debug!("read file {:?}", path.as_ref());
@@ -41,6 +27,26 @@ pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<(Track, Tag)> {
         },
         tag,
     ))
+}
+
+#[cfg(test)]
+mod test {
+
+    use super::*;
+
+    #[test]
+    fn test_parse_single_file() {
+        let (track, _) = parse_file("../TestData/sherlock_holmes.mp3").unwrap();
+
+        let reference_track = Track {
+            title: "02 - The Red-Headed League".to_string(),
+            reader: vec!["Sir Arthur Conan Doyle".to_string()],
+            track: 2,
+            disc: None,
+        };
+
+        assert_eq!(reference_track, track);
+    }
 }
 
 #[derive(Serialize, Debug, PartialEq, Eq)]
