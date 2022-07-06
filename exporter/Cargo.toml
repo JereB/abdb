@@ -9,3 +9,6 @@ id3 = "1.2.0"
 serde = {version = "1.0.137", features = ["derive"]}
 tracing = "0.1.35"
 tracing-subscriber = "0.3.11"
+
+[dev-dependencies]
+insta = "1.15.0"

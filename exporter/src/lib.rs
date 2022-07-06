@@ -38,14 +38,7 @@ mod test {
     fn test_parse_single_file() {
         let (track, _) = parse_file("../TestData/sherlock_holmes.mp3").unwrap();
 
-        let reference_track = Track {
-            title: "02 - The Red-Headed League".to_string(),
-            reader: vec!["Sir Arthur Conan Doyle".to_string()],
-            track: 2,
-            disc: None,
-        };
-
-        assert_eq!(reference_track, track);
+        insta::assert_yaml_snapshot!(track);
     }
 }
 
