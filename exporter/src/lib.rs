@@ -37,7 +37,16 @@ mod test {
     #[test]
     fn test_parse_single_file() {
         let (track, _) = parse_file("../TestData/sherlock_holmes.mp3").unwrap();
+        insta::assert_yaml_snapshot!(track);
 
+        let (track, _) = parse_file("../TestData/Huckfinn/huckfinn_01_twain_apc_64kb.mp3").unwrap();
+        insta::assert_yaml_snapshot!(track);
+
+        let (track, _) =
+            parse_file("../TestData/Penguin Island/penguin_island_01_france_64kb.mp3").unwrap();
+        insta::assert_yaml_snapshot!(track);
+
+        let (track, _) = parse_file("../TestData/Winnetou/winnetou1_01_may_64kb.mp3").unwrap();
         insta::assert_yaml_snapshot!(track);
     }
 }
