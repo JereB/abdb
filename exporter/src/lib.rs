@@ -1,11 +1,13 @@
-use std::{collections::HashSet, path::Path};
+use std::{collections::HashSet, fs::DirEntry, path::Path};
 
-use color_eyre::eyre::{eyre, Result};
+use color_eyre::eyre::{eyre, Result, WrapErr};
 use id3::{Tag, TagLike};
 use serde::Serialize;
+use tracing::warn;
 
 pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<(Track, Tag)> {
-    let tag = Tag::read_from_path(&path)?;
+    let tag = Tag::read_from_path(&path)
+        .wrap_err(format!("can't parse file: {:?}", path.as_ref().display()))?;
     tracing::debug!("read file {:?}", path.as_ref());
 
     Ok((
@@ -27,6 +29,39 @@ pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<(Track, Tag)> {
         },
         tag,
     ))
+}
+
+pub fn parse_book<P: AsRef<Path>>(path: P) -> Result<Book> {
+    let mut tracks = std::fs::read_dir(&path)?
+        // only use entries that can be read
+        .filter_map(|res| {
+            if let Err(e) = res {
+                warn!("Error while collecting path: {:?}", &e);
+                None
+            } else {
+                res.ok()
+            }
+        })
+        // only use files, no symlinks or directories
+        .filter(|dir_entry| {
+            if let Ok(ft) = dir_entry.file_type() {
+                return ft.is_file();
+            }
+            false
+        })
+        // only each path is used
+        .map(|de| DirEntry::path(&de))
+        .map(parse_file)
+        .filter_map(|parse_res| {
+            if let Err(e) = parse_res {
+                warn!("Error parsing: {:?}", e);
+                None
+            } else {
+                parse_res.ok()
+            }
+        });
+
+    todo!("good way to reduce file infos to book");
 }
 
 #[cfg(test)]
