@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{collections::HashSet, path::Path};
 
 use color_eyre::eyre::{eyre, Result};
 use id3::{Tag, TagLike};
@@ -53,8 +53,8 @@ pub struct Track {
 #[derive(Debug, Serialize, PartialEq, Eq)]
 pub struct Book {
     title: String,
-    author: Vec<String>,
-    reader: Vec<String>,
+    author: HashSet<String>,
+    reader: HashSet<String>,
     tracks: Vec<Track>,
     total_tracks: u32,
     discs: Option<u32>,
