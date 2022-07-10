@@ -102,22 +102,22 @@ expression: result
     - title: winnetou1_02_may_64kb
       reader:
         - Stefan Haubold
-      track: 1
+      track: 2
       disc: ~
     - title: winnetou1_03_may_64kb
       reader:
         - Stephan Möbius
-      track: 2
+      track: 3
       disc: ~
     - title: winnetou1_04_may_64kb
       reader:
         - Kim Reichert
-      track: 3
+      track: 4
       disc: ~
     - title: winnetou1_05_may_64kb
       reader:
         - Stephan Gambke
-      track: 4
+      track: 5
       disc: ~
   total_tracks: 5
   discs: ~
