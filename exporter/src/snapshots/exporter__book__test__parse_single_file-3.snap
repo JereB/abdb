@@ -1,5 +1,5 @@
 ---
-source: src/lib.rs
+source: src/book.rs
 expression: book
 ---
 title: penguin_island_01_france_64kb

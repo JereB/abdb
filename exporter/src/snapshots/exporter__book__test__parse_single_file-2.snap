@@ -1,5 +1,5 @@
 ---
-source: src/lib.rs
+source: src/book.rs
 expression: book
 ---
 title: huckfinn_01_twain_apc_64kb
