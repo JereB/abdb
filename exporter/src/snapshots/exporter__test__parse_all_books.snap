@@ -1,0 +1,125 @@
+---
+source: src/lib.rs
+expression: result
+---
+- title: The Adventures of Sherlock Holmes
+  author:
+    - ""
+  reader:
+    - Sir Arthur Conan Doyle
+  tracks:
+    - title: 02 - The Red-Headed League
+      reader:
+        - Sir Arthur Conan Doyle
+      track: 2
+      disc: ~
+  total_tracks: 1
+  discs: ~
+  year: ~
+- title: The Adventures of Huckleberry Finn
+  author:
+    - Mark Twain
+  reader:
+    - Annie Coleman Rothenberg
+  tracks:
+    - title: huckfinn_01_twain_apc_64kb
+      reader:
+        - Annie Coleman Rothenberg
+      track: 1
+      disc: ~
+    - title: huckfinn_02_twain_apc_64kb
+      reader:
+        - Annie Coleman Rothenberg
+      track: 2
+      disc: ~
+    - title: huckfinn_03_twain_apc_64kb
+      reader:
+        - Annie Coleman Rothenberg
+      track: 3
+      disc: ~
+    - title: huckfinn_04_twain_apc_64kb
+      reader:
+        - Annie Coleman Rothenberg
+      track: 4
+      disc: ~
+    - title: huckfinn_05_twain_apc_64kb
+      reader:
+        - Annie Coleman Rothenberg
+      track: 5
+      disc: ~
+  total_tracks: 5
+  discs: ~
+  year: ~
+- title: Penguin Island
+  author:
+    - Anatole France
+  reader:
+    - Michael Sirois
+  tracks:
+    - title: penguin_island_01_france_64kb
+      reader:
+        - Michael Sirois
+      track: 1
+      disc: ~
+    - title: penguin_island_02_france_64kb
+      reader:
+        - Michael Sirois
+      track: 2
+      disc: ~
+    - title: penguin_island_03_france_64kb
+      reader:
+        - Michael Sirois
+      track: 3
+      disc: ~
+    - title: penguin_island_04_france_64kb
+      reader:
+        - Michael Sirois
+      track: 4
+      disc: ~
+    - title: penguin_island_05_france_64kb
+      reader:
+        - Michael Sirois
+      track: 5
+      disc: ~
+  total_tracks: 5
+  discs: ~
+  year: ~
+- title: Winnetou I
+  author:
+    - Karl May
+  reader:
+    - Gesine
+    - Kim Reichert
+    - Stefan Haubold
+    - Stephan Gambke
+    - Stephan Möbius
+  tracks:
+    - title: winnetou1_01_may_64kb
+      reader:
+        - Gesine
+      track: 1
+      disc: ~
+    - title: winnetou1_02_may_64kb
+      reader:
+        - Stefan Haubold
+      track: 1
+      disc: ~
+    - title: winnetou1_03_may_64kb
+      reader:
+        - Stephan Möbius
+      track: 2
+      disc: ~
+    - title: winnetou1_04_may_64kb
+      reader:
+        - Kim Reichert
+      track: 3
+      disc: ~
+    - title: winnetou1_05_may_64kb
+      reader:
+        - Stephan Gambke
+      track: 4
+      disc: ~
+  total_tracks: 5
+  discs: ~
+  year: ~
+
