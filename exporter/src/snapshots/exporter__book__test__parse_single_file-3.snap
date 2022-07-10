@@ -2,7 +2,7 @@
 source: src/book.rs
 expression: book
 ---
-title: penguin_island_01_france_64kb
+title: Penguin Island
 author:
   - Anatole France
 reader:

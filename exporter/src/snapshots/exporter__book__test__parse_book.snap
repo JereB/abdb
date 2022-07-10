@@ -1,6 +1,6 @@
 ---
 source: src/book.rs
-expression: book
+expression: result
 ---
 title: The Adventures of Sherlock Holmes
 author:

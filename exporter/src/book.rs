@@ -29,7 +29,15 @@ pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<Book> {
     };
 
     Ok(Book {
-        title: track.title.clone(),
+        title: tag
+            .album()
+            .ok_or_else(|| {
+                eyre!(
+                    "File has no album title/book title: {:?}",
+                    path.as_ref().display()
+                )
+            })?
+            .to_string(),
         author: {
             let author = tag.album_artist().unwrap_or("").to_string();
             let mut authors = OrdSet::new();
@@ -101,6 +109,21 @@ mod test {
 
         let book = parse_file("../TestData/Winnetou/winnetou1_01_may_64kb.mp3").unwrap();
         insta::assert_yaml_snapshot!(book);
+    }
+
+    #[test]
+    fn test_parse_book() {
+        let result = parse_book("../TestData").unwrap();
+        insta::assert_yaml_snapshot!(result);
+
+        let result = parse_book("../TestData/Huckfinn").unwrap();
+        insta::assert_yaml_snapshot!(result);
+
+        let result = parse_book("../TestData/Penguin Island").unwrap();
+        insta::assert_yaml_snapshot!(result);
+
+        let result = parse_book("../TestData/Winnetou").unwrap();
+        insta::assert_yaml_snapshot!(result);
     }
 }
 

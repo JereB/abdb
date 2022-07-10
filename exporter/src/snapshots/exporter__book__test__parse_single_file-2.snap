@@ -2,7 +2,7 @@
 source: src/book.rs
 expression: book
 ---
-title: huckfinn_01_twain_apc_64kb
+title: The Adventures of Huckleberry Finn
 author:
   - Mark Twain
 reader:
