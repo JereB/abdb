@@ -169,10 +169,7 @@ impl Book {
 
         let reader = left_book.reader + right_book.reader;
 
-        let mut tracks = left_book.tracks + right_book.tracks;
-
-        // sort by the track
-        tracks.sort_by(|track1, track2| track1.track.cmp(&track2.track));
+        let tracks = left_book.tracks + right_book.tracks;
 
         let total_tracks = left_book.total_tracks + right_book.total_tracks;
 
