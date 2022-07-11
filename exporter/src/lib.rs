@@ -33,6 +33,6 @@ mod test {
             .map(Result::unwrap)
             .collect::<Vec<_>>();
 
-        insta::assert_yaml_snapshot!(result);
+        insta::assert_yaml_snapshot!(result, {"." => insta::sorted_redaction()});
     }
 }

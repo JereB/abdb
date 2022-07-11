@@ -2,18 +2,38 @@
 source: src/lib.rs
 expression: result
 ---
-- title: The Adventures of Sherlock Holmes
+- title: Penguin Island
   author:
-    - ""
+    - Anatole France
   reader:
-    - Sir Arthur Conan Doyle
+    - Michael Sirois
   tracks:
-    - title: 02 - The Red-Headed League
+    - title: penguin_island_01_france_64kb
       reader:
-        - Sir Arthur Conan Doyle
+        - Michael Sirois
+      track: 1
+      disc: ~
+    - title: penguin_island_02_france_64kb
+      reader:
+        - Michael Sirois
       track: 2
       disc: ~
-  total_tracks: 1
+    - title: penguin_island_03_france_64kb
+      reader:
+        - Michael Sirois
+      track: 3
+      disc: ~
+    - title: penguin_island_04_france_64kb
+      reader:
+        - Michael Sirois
+      track: 4
+      disc: ~
+    - title: penguin_island_05_france_64kb
+      reader:
+        - Michael Sirois
+      track: 5
+      disc: ~
+  total_tracks: 5
   discs: ~
   year: ~
 - title: The Adventures of Huckleberry Finn
@@ -50,38 +70,18 @@ expression: result
   total_tracks: 5
   discs: ~
   year: ~
-- title: Penguin Island
+- title: The Adventures of Sherlock Holmes
   author:
-    - Anatole France
+    - ""
   reader:
-    - Michael Sirois
+    - Sir Arthur Conan Doyle
   tracks:
-    - title: penguin_island_01_france_64kb
+    - title: 02 - The Red-Headed League
       reader:
-        - Michael Sirois
-      track: 1
-      disc: ~
-    - title: penguin_island_02_france_64kb
-      reader:
-        - Michael Sirois
+        - Sir Arthur Conan Doyle
       track: 2
       disc: ~
-    - title: penguin_island_03_france_64kb
-      reader:
-        - Michael Sirois
-      track: 3
-      disc: ~
-    - title: penguin_island_04_france_64kb
-      reader:
-        - Michael Sirois
-      track: 4
-      disc: ~
-    - title: penguin_island_05_france_64kb
-      reader:
-        - Michael Sirois
-      track: 5
-      disc: ~
-  total_tracks: 5
+  total_tracks: 1
   discs: ~
   year: ~
 - title: Winnetou I
