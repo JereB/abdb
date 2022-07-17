@@ -14,7 +14,10 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windwos-latest]
     defaults:
       run:
         working-directory: exporter
