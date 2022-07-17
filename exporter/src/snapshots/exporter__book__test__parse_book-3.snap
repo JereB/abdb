@@ -1,0 +1,39 @@
+---
+source: src/book.rs
+expression: result
+---
+title: Penguin Island
+author:
+  - Anatole France
+reader:
+  - Michael Sirois
+tracks:
+  - title: penguin_island_01_france_64kb
+    reader:
+      - Michael Sirois
+    track: 1
+    disc: ~
+  - title: penguin_island_02_france_64kb
+    reader:
+      - Michael Sirois
+    track: 2
+    disc: ~
+  - title: penguin_island_03_france_64kb
+    reader:
+      - Michael Sirois
+    track: 3
+    disc: ~
+  - title: penguin_island_04_france_64kb
+    reader:
+      - Michael Sirois
+    track: 4
+    disc: ~
+  - title: penguin_island_05_france_64kb
+    reader:
+      - Michael Sirois
+    track: 5
+    disc: ~
+total_tracks: 5
+discs: ~
+year: ~
+

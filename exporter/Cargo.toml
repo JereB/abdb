@@ -6,9 +6,10 @@ version = "0.1.0"
 [dependencies]
 color-eyre = "0.6.1"
 id3 = "1.2.0"
+im = {version = "15.1.0", features = ["serde"]}
 serde = {version = "1.0.137", features = ["derive"]}
 tracing = "0.1.35"
 tracing-subscriber = "0.3.11"
 
 [dev-dependencies]
-insta = "1.15.0"
+insta = {version = "1.15.0", features = ["redactions"]}

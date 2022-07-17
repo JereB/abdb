@@ -1,0 +1,19 @@
+---
+source: src/book.rs
+expression: result
+---
+title: The Adventures of Sherlock Holmes
+author:
+  - ""
+reader:
+  - Sir Arthur Conan Doyle
+tracks:
+  - title: 02 - The Red-Headed League
+    reader:
+      - Sir Arthur Conan Doyle
+    track: 2
+    disc: ~
+total_tracks: 1
+discs: ~
+year: ~
+
