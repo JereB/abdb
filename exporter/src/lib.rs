@@ -1,11 +1,11 @@
-use std::{fs::read_dir, iter::once_with, path::PathBuf};
+use std::{fs::read_dir, iter::once, path::PathBuf};
 
-use book::Book;
+use book::AudioBook;
 use color_eyre::Result;
 
 mod book;
 
-pub fn parse_all_books(path: PathBuf) -> Box<dyn Iterator<Item = Result<Book>>> {
+pub fn parse_all_books(path: PathBuf) -> Box<dyn Iterator<Item = Result<AudioBook>>> {
     let sub_dirs = read_dir(path.clone())
         .unwrap()
         // only readable entries
@@ -14,11 +14,14 @@ pub fn parse_all_books(path: PathBuf) -> Box<dyn Iterator<Item = Result<Book>>> 
         .filter(|dir| dir.file_type().map_or(false, |t| t.is_dir()))
         .flat_map(|dir| parse_all_books(dir.path()));
 
-    let one_book = { once_with(move || book::parse_book(path)) };
+    let opt_audio_book = book::parse_book(path);
 
-    let result = one_book.chain(sub_dirs);
-
-    Box::new(result)
+    if let Some(audio_book) = opt_audio_book {
+        let one_book = { once(audio_book) };
+        Box::new(one_book.chain(sub_dirs))
+    } else {
+        Box::new(sub_dirs)
+    }
 }
 
 #[cfg(test)]

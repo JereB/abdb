@@ -6,7 +6,7 @@ use im::{vector, OrdSet, Vector};
 use serde::Serialize;
 use tracing::warn;
 
-pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<Book> {
+pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<AudioBook> {
     let tag = Tag::read_from_path(&path)
         .wrap_err(format!("can't parse file: {:?}", path.as_ref().display()))?;
     tracing::debug!("read file {:?}", path.as_ref());
@@ -28,7 +28,7 @@ pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<Book> {
         disc: tag.disc(),
     };
 
-    Ok(Book {
+    Ok(AudioBook {
         title: tag
             .album()
             .ok_or_else(|| {
@@ -52,8 +52,15 @@ pub fn parse_file<P: AsRef<Path>>(path: P) -> Result<Book> {
     })
 }
 
-pub fn parse_book<P: AsRef<Path>>(path: P) -> Result<Book> {
-    std::fs::read_dir(&path)?
+pub fn parse_book<P: AsRef<Path>>(path: P) -> Option<Result<AudioBook>> {
+    let x = std::fs::read_dir(&path);
+
+    let read_dir = match x {
+        Ok(read_dir) => read_dir,
+        Err(e) => return Some(Err(e.into())),
+    };
+
+    let unsortet_book = read_dir
         // only use entries that can be read
         .filter_map(|res| {
             if let Err(e) = res {
@@ -86,8 +93,14 @@ pub fn parse_book<P: AsRef<Path>>(path: P) -> Result<Book> {
         // convert to Result for easier reduction
         .map(Result::Ok)
         // reduce to one book
-        .reduce(Book::merge)
-        .unwrap_or_else(|| Err(eyre!("No book in {:?}", path.as_ref().display())))
+        .reduce(AudioBook::merge)?;
+
+    // when there is a audioBook the tracks must be ordered not by their occurence in the fs but by their number
+    Some(unsortet_book.map(|mut book| {
+        book.tracks
+            .sort_by(|track1, track2| track1.track.cmp(&track2.track));
+        book
+    }))
 }
 
 #[cfg(test)]
@@ -113,17 +126,23 @@ mod test {
 
     #[test]
     fn test_parse_book() {
-        let result = parse_book("../TestData").unwrap();
+        let result = parse_book("../TestData").unwrap().unwrap();
         insta::assert_yaml_snapshot!(result);
 
-        let result = parse_book("../TestData/Huckfinn").unwrap();
+        let result = parse_book("../TestData/Huckfinn").unwrap().unwrap();
         insta::assert_yaml_snapshot!(result);
 
-        let result = parse_book("../TestData/Penguin Island").unwrap();
+        let result = parse_book("../TestData/Penguin Island").unwrap().unwrap();
         insta::assert_yaml_snapshot!(result);
 
-        let result = parse_book("../TestData/Winnetou").unwrap();
+        let result = parse_book("../TestData/Winnetou").unwrap().unwrap();
         insta::assert_yaml_snapshot!(result);
+    }
+
+    #[test]
+    fn test_parse_folder_without_audiofiles() {
+        dbg!(parse_book("../TestData/empty folder"));
+        assert!(parse_book("../TestData/empty folder").is_none());
     }
 }
 
@@ -136,7 +155,7 @@ struct Track {
 }
 
 #[derive(Debug, Serialize, PartialEq, Eq)]
-pub struct Book {
+pub struct AudioBook {
     title: String,
     author: OrdSet<String>,
     reader: OrdSet<String>,
@@ -146,7 +165,7 @@ pub struct Book {
     year: Option<i32>,
 }
 
-impl Book {
+impl AudioBook {
     /// Function to merge to books.
     /// This is used to parse each file as a book and then aggregate them to one single book.
     /// It is only possible if discnumber, title and year are given the same value
@@ -169,10 +188,7 @@ impl Book {
 
         let reader = left_book.reader + right_book.reader;
 
-        let mut tracks = left_book.tracks + right_book.tracks;
-
-        // sort by the track
-        tracks.sort_by(|track1, track2| track1.track.cmp(&track2.track));
+        let tracks = left_book.tracks + right_book.tracks;
 
         let total_tracks = left_book.total_tracks + right_book.total_tracks;
 
@@ -196,7 +212,7 @@ impl Book {
             ))
         }?;
 
-        Ok(Book {
+        Ok(AudioBook {
             title,
             author,
             reader,
