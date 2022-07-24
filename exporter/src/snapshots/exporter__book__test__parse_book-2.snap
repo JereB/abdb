@@ -1,0 +1,39 @@
+---
+source: src/book.rs
+expression: result
+---
+title: The Adventures of Huckleberry Finn
+author:
+  - Mark Twain
+reader:
+  - Annie Coleman Rothenberg
+tracks:
+  - title: huckfinn_01_twain_apc_64kb
+    reader:
+      - Annie Coleman Rothenberg
+    track: 1
+    disc: ~
+  - title: huckfinn_02_twain_apc_64kb
+    reader:
+      - Annie Coleman Rothenberg
+    track: 2
+    disc: ~
+  - title: huckfinn_03_twain_apc_64kb
+    reader:
+      - Annie Coleman Rothenberg
+    track: 3
+    disc: ~
+  - title: huckfinn_04_twain_apc_64kb
+    reader:
+      - Annie Coleman Rothenberg
+    track: 4
+    disc: ~
+  - title: huckfinn_05_twain_apc_64kb
+    reader:
+      - Annie Coleman Rothenberg
+    track: 5
+    disc: ~
+total_tracks: 5
+discs: ~
+year: ~
+
